@@ -39,5 +39,34 @@ var MenuPageControlSchema = new Schema({
     
 });
 
+var TeamsSchema = new Schema({
+    teamId: {
+        type: String
+    },
+    teamName: {
+        type: String
+    },
+    parentTeamId: {
+        type: String
+    }
+    
+});
+
+var RolesSchema = new Schema({
+    roleId: {
+        type: String
+    },
+    roleName: {
+        type: String
+    },
+    parentRoleId: {
+        type: String
+    }
+    
+});
+
+
 module.exports = mongoose.model('Menu', MenuSchema, 'Menu');
 module.exports = mongoose.model('MenuPageControl', MenuPageControlSchema, 'MenuPageControl');
+module.exports = mongoose.model('Teams', TeamsSchema, 'Teams');
+module.exports = mongoose.model('Roles', RolesSchema, 'Roles');
