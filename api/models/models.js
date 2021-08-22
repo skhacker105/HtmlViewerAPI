@@ -65,8 +65,25 @@ var RolesSchema = new Schema({
     
 });
 
+var UsersSchema = new Schema({
+    userId: {
+        type: String
+    },
+    userName: {
+        type: String
+    },
+    roleId: {
+        type: String
+    },
+    teamIds: {
+        type: String
+    }
+    
+});
+
 
 module.exports = mongoose.model('Menu', MenuSchema, 'Menu');
 module.exports = mongoose.model('MenuPageControl', MenuPageControlSchema, 'MenuPageControl');
 module.exports = mongoose.model('Teams', TeamsSchema, 'Teams');
 module.exports = mongoose.model('Roles', RolesSchema, 'Roles');
+module.exports = mongoose.model('Users', UsersSchema, 'Users');
