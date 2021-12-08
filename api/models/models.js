@@ -35,8 +35,7 @@ var MenuPageControlSchema = new Schema({
     },
     parentControlId: {
         type: String
-    },
-    
+    }
 });
 
 var TeamsSchema = new Schema({
@@ -81,9 +80,34 @@ var UsersSchema = new Schema({
     
 });
 
+var EventsSchema = new Schema({
+    eventId: {
+        type: String
+    },
+    eventName: {
+        type: String
+    },
+    eventType: {
+        type: String
+    },
+    menuId: {
+        type: String
+    },
+    controlId: {
+        type: String
+    },
+    value: {
+        type: String
+    },
+    isOutput: {
+        type: Boolean
+    }
+});
+
 
 module.exports = mongoose.model('Menu', MenuSchema, 'Menu');
 module.exports = mongoose.model('MenuPageControl', MenuPageControlSchema, 'MenuPageControl');
 module.exports = mongoose.model('Teams', TeamsSchema, 'Teams');
 module.exports = mongoose.model('Roles', RolesSchema, 'Roles');
 module.exports = mongoose.model('Users', UsersSchema, 'Users');
+module.exports = mongoose.model('Events', EventsSchema, 'Events');

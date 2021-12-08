@@ -50,4 +50,16 @@ module.exports = function(app) {
     app.route('/users/:Id')
     .put(menuController.update_user)
     .delete(menuController.delete_user);
+
+
+    // EVENTS
+    app.route('/events')
+    .post(menuController.add_event)
+
+    app.route('/events/:menuId')
+    .get(menuController.get_all_events);
+
+    app.route('/events/:Id')
+    .put(menuController.update_event)
+    .delete(menuController.delete_event);
 };

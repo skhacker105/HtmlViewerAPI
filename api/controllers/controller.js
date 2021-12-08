@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
     MenuPageControl = mongoose.model('MenuPageControl'),
     Teams = mongoose.model('Teams'),
     Roles = mongoose.model('Roles'),
-    Users = mongoose.model('Users');
+    Users = mongoose.model('Users'),
+    Events = mongoose.model('Events');
 
 // MENU Controllers
 exports.get_all_menu = function (req, res) {
@@ -41,7 +42,7 @@ exports.delete_menu = function (req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'Menu successfully deleted' });
     });
 }
 
@@ -80,7 +81,7 @@ exports.delete_page_control = function (req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'Page Control successfully deleted' });
     });
 }
 
@@ -119,7 +120,7 @@ exports.delete_team = function (req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'Team successfully deleted' });
     });
 }
 
@@ -158,7 +159,7 @@ exports.delete_role = function (req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'Role successfully deleted' });
     });
 }
 
@@ -197,6 +198,45 @@ exports.delete_user = function (req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'User successfully deleted' });
+    });
+}
+
+
+// EVENTS Controllers
+exports.get_all_events = function (req, res) {
+    Events.find({ menuId: req.params.menuId }, function (err, m) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(m);
+    });
+};
+
+exports.add_event = function (req, res) {
+    var newevent = new Events(req.body);
+    newevent.save(function (err, m) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(m);
+    });
+}
+
+exports.update_event = function (req, res) {
+    Events.findOneAndUpdate({ eventId: req.params.Id }, req.body, { new: true }, function (err, m) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(m);
+    });
+}
+
+exports.delete_event = function (req, res) {
+    Events.remove({ eventId: req.params.Id }, function (err, m) {
+        if (err) {
+            res.send(err);
+        }
+        res.json({ message: 'Event successfully deleted' });
     });
 }
