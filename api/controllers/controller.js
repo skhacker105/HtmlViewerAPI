@@ -1,13 +1,21 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Menu = mongoose.model('Menu'),
+require('../models/menu.js');
+require('../models/menu-page-control.js');
+require('../models/teams.js');
+require('../models/roles.js');
+require('../models/users.js');
+require('../models/events.js');
+
+var mongoose = require('mongoose');
+var Menu = mongoose.model('Menu'),
     MenuPageControl = mongoose.model('MenuPageControl'),
     Teams = mongoose.model('Teams'),
     Roles = mongoose.model('Roles'),
     Users = mongoose.model('Users'),
     Events = mongoose.model('Events');
 
+    
 // MENU Controllers
 exports.get_all_menu = function (req, res) {
     Menu.find({}, function (err, m) {

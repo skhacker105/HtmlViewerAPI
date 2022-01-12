@@ -1,65 +1,65 @@
 'use strict';
 
 module.exports = function(app) {
-    var menuController = require('../controllers/controller');
+    var controllers = require('../controllers/controller');
 
     // MENU
     app.route('/menu')
-    .get(menuController.get_all_menu)
-    .post(menuController.add_menu);
+    .get(controllers.get_all_menu)
+    .post(controllers.add_menu);
 
     app.route('/menu/:Id')
-    .get(menuController.get_all_page_control)
-    .put(menuController.update_menu)
-    .delete(menuController.delete_menu);
+    .get(controllers.get_all_page_control)
+    .put(controllers.update_menu)
+    .delete(controllers.delete_menu);
 
 
     // CONTROLS
     app.route('/controls/')
-    .post(menuController.add_page_control);
+    .post(controllers.add_page_control);
 
     app.route('/controls/:Id')
-    .put(menuController.update_page_control)
-    .delete(menuController.delete_page_control);
+    .put(controllers.update_page_control)
+    .delete(controllers.delete_page_control);
 
     // TEAMS
     app.route('/teams')
-    .get(menuController.get_all_teams)
-    .post(menuController.add_team)
+    .get(controllers.get_all_teams)
+    .post(controllers.add_team)
 
     app.route('/teams/:Id')
-    .put(menuController.update_team)
-    .delete(menuController.delete_team);
+    .put(controllers.update_team)
+    .delete(controllers.delete_team);
 
 
     // ROLES
     app.route('/roles')
-    .get(menuController.get_all_roles)
-    .post(menuController.add_role)
+    .get(controllers.get_all_roles)
+    .post(controllers.add_role)
 
     app.route('/roles/:Id')
-    .put(menuController.update_role)
-    .delete(menuController.delete_role);
+    .put(controllers.update_role)
+    .delete(controllers.delete_role);
 
 
     // USERS
     app.route('/users')
-    .get(menuController.get_all_users)
-    .post(menuController.add_user)
+    .get(controllers.get_all_users)
+    .post(controllers.add_user)
 
     app.route('/users/:Id')
-    .put(menuController.update_user)
-    .delete(menuController.delete_user);
+    .put(controllers.update_user)
+    .delete(controllers.delete_user);
 
 
     // EVENTS
     app.route('/events')
-    .post(menuController.add_event)
+    .post(controllers.add_event)
 
     app.route('/events/:menuId')
-    .get(menuController.get_all_events);
+    .get(controllers.get_all_events);
 
     app.route('/events/:Id')
-    .put(menuController.update_event)
-    .delete(menuController.delete_event);
+    .put(controllers.update_event)
+    .delete(controllers.delete_event);
 };

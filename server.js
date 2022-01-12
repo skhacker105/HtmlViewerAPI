@@ -3,7 +3,6 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    MenuModel = require('./api/models/models'),
     bodyParser = require('body-parser');
 
 // mongoose instance connection url connection
@@ -20,5 +19,6 @@ app.use(cors({
 var routes = require('./api/routes/routes');
 routes(app);
 
-app.listen(port);
-console.log(' server started on port ' + port);
+app.listen(port, () => {
+    console.log(' server started on port ' + port);
+});
