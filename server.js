@@ -3,20 +3,29 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    auth = require('./api/authorization/authorize-middleware'),
+    cors = require('cors'),
+    cookieParser = require('cookie-parser'),
+    routes = require('./api/routes/routes'),
+    dotenv = require('dotenv');
+
+dotenv.config();
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/HtmlView', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true });
 
+// middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-const cors = require('cors');
 app.use(cors({
-    origin: '*'
+    origin: true,
+    credentials: true
 }));
-var routes = require('./api/routes/routes');
+app.use(cookieParser());
+app.use(auth.isAuthorized);
+
 routes(app);
 
 app.listen(port, () => {

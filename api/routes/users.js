@@ -11,4 +11,10 @@ module.exports = function(app) {
     app.route('/users/:Id')
     .put(controllers.update_user)
     .delete(controllers.delete_user);
+
+    app.route('/users/login')
+    .post(controllers.get_login_user);
+
+    app.route('/users/logout')
+    .get(controllers.logout);
 };

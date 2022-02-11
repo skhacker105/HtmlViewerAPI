@@ -9,6 +9,9 @@ var UsersSchema = new Schema({
     userName: {
         type: String
     },
+    password: {
+        type: String
+    },
     roleId: {
         type: String
     },
