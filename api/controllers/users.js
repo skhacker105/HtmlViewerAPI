@@ -24,11 +24,11 @@ exports.get_login_user = function (req, res) {
                 user,
                 process.env.SHARED_KEY,
                 {
-                  expiresIn: process.env.SESSION_DURATION,
+                  expiresIn: process.env.SESSION_DURATION * 1,
                 }
               );
             res.cookie(process.env.TOKEN_KEY,token, {
-                maxAge: process.env.SESSION_DURATION
+                maxAge: process.env.SESSION_DURATION * 1
             });
             res.json(user);
         } else {
