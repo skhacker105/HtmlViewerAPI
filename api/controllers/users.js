@@ -18,8 +18,10 @@ exports.get_login_user = function (req, res) {
         if (m && m.length > 0) {
             let user = JSON.parse(JSON.stringify(m[0]));
             delete user['password'];
+            const now = new Date();
+            user['expiry'] = new Date(now.getTime() + (process.env.SESSION_DURATION * 1));
             const token = jwt.sign(
-                { user_id: user._id },
+                user,
                 process.env.SHARED_KEY,
                 {
                   expiresIn: process.env.SESSION_DURATION,
