@@ -2,9 +2,9 @@
 
 require('../models/users.js');
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    jwt = require("jsonwebtoken");
 var Users = mongoose.model('Users');
-const { API_ENV } = process.env;
     
 // USERS Controllers
 exports.get_login_user = function (req, res) {
@@ -18,9 +18,15 @@ exports.get_login_user = function (req, res) {
         if (m && m.length > 0) {
             let user = JSON.parse(JSON.stringify(m[0]));
             delete user['password'];
-            const token = helper.generate_token();
-            res.cookie('token',token, {
-                maxAge: 24 * 60 * 60 * 1000
+            const token = jwt.sign(
+                { user_id: user._id },
+                process.env.SHARED_KEY,
+                {
+                  expiresIn: process.env.SESSION_DURATION,
+                }
+              );
+            res.cookie(process.env.TOKEN_KEY,token, {
+                maxAge: process.env.SESSION_DURATION
             });
             res.json(user);
         } else {

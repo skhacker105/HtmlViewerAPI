@@ -1,8 +1,18 @@
+const jwt = require("jsonwebtoken")
+
 module.exports.isAuthorized = function(req, res, next) {
-    console.log('req.cookie = ', req.cookie);
-    if (req.url != '/users/login' && req.url != '/users/logout' && req.method != 'OPTIONS' && !req.headers.authorization) {
-        res.status(401).send('Unauthorised access');
-        return;
+    if (req.url != '/users/login') {
+        if (!req.headers.cookie) {
+            res.status(401).send('Unauthorised access');
+            return;
+        } else if (req.headers.cookie && req.url != '/users/logout') {
+            const token = req.headers.cookie?.replace(process.env.TOKEN_KEY + '=', '');
+            const tokenObj = jwt.verify(token, process.env.SHARED_KEY);
+            if (!tokenObj) {
+                res.status(401).send('Invalid token');
+                return;
+            }
+        }
     }
     next();
 }
